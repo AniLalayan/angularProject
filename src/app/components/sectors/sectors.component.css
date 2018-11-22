@@ -1,0 +1,85 @@
+.Sectors {
+  height: 400px;
+  box-shadow: 0 2px 3px rgba(0,0,0,.18);
+  margin: 0px auto 25px;
+  background-color: #FFFFFF;
+  border: 1px;
+  width: 1150px;
+  border-color: #eee;
+  box-shadow: 0 2px 3px rgba(0,0,0,.18);
+  box-sizing: border-box;
+  padding-left: 25px;
+  padding-top: 3px;
+  position: relative;
+}
+
+h2 {
+  color: #272767;
+  font-size:20px;
+  font-weight: normal;
+  line-height: 30px;
+  margin-bottom: 35px;
+}
+
+.SectorName, .Percent {
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 36px;
+  color: #878787;
+}
+
+.PercentInput, .SectorInput {
+  margin-top: 10px;
+  margin-bottom: 40px;
+  height: 25px;
+  width: 220px;
+}
+
+.SectorInput {
+  width: 270px;
+}
+
+.PercentInput {
+  width: 100px;
+  margin-left: 135px;
+}
+
+.asterisk {
+  color: #b94a48;
+  padding-left: 4px;
+}
+
+.percent {
+  margin-left: 50px;
+}
+
+.AddBtn {
+  background-color: #6FAC28;
+  color: #fff;
+  width: 90px;
+  margin-left: 100px;
+  border: 0px;
+  margin-right: 5px;
+  margin-top: 0px;
+  padding: 10px 25px 10px 25px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.24);
+}
+
+table {
+  width: 50%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.add {
+  margin-top: 50px;
+}
+
+.select {
+  width: 250px;
+}

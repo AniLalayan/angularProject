@@ -1,0 +1,33 @@
+{
+  "id": 3,
+  "code": "aas44",
+  "title": "Title3",
+  "description": "This is project 3",
+  "implementationStatusId": 5,
+  "plannedStartDate": 10102011,
+  "plannedEndDate": 20102017,
+  "sectors": [
+    {
+      "id": 3,
+      "percent": 18
+    },
+    {
+      "id": 4,
+      "percent": 82
+    }
+  ],
+  "location": [
+    {
+      "id": 11,
+      "countryId": 2,
+      "districtId": 5,
+      "percent": 42
+    },
+    {
+      "id": 12,
+      "countryId": 2,
+      "districtId": 6,
+      "percent": 58
+    }
+  ]
+}

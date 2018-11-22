@@ -1,0 +1,33 @@
+{
+  "id": 1,
+  "code": "aas45",
+  "title": "Title1",
+  "description": "This is project 1",
+  "implementationStatusId": 3,
+  "plannedStartDate": 1456434554,
+  "plannedEndDate": 2456434554,
+  "sectors": [
+    {
+      "id": 4,
+      "percent": 15
+    },
+    {
+      "id": 2,
+      "percent": 45
+    }
+  ],
+  "location": [
+    {
+      "id": 3,
+      "countryId": 2,
+      "districtId": 4,
+      "percent": 20
+    },
+    {
+      "id": 11,
+      "countryId": 1,
+      "districtId": 1,
+      "percent": 80
+    }
+  ]
+}

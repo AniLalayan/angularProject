@@ -1,0 +1,67 @@
+.Sample {
+  height: 520px;
+  top: 175px;
+  margin: 0px auto 200px;
+  background-color: #FFFFFF;
+  border: 1px;
+  width: 1150px;
+  border-color: #eee;
+  box-shadow: 0 2px 3px rgba(0,0,0,.18);
+  box-sizing: border-box;
+  padding-left: 25px;
+  padding-top: 3px;
+  position: relative;
+}
+
+h2 {
+  color: #272767;
+  font-size:20px;
+  font-weight: normal;
+  line-height: 30px;
+  margin-bottom: 35px;
+}
+
+.PlannedStartDate {
+  margin-left: 195px;
+}
+
+.PlannedEndDate {
+  margin-left: 120px;
+}
+
+.Duration {
+  font-family: Helvetica;
+  color: #878787;
+}
+
+.ProjectCodeInput, .ProjectTitleInput, .DescriptionInput {
+  margin-top: 10px;
+  margin-bottom: 60px;
+  height: 25px;
+  width: 220px;
+}
+
+
+.ProjectTitleInput {
+  margin-left: 50px;
+  width: 820px;
+}
+
+.DescriptionInput {
+  width: 97%;
+}
+
+.status {
+  width: 250px;
+  margin-right: 100px;
+}
+
+.dates {
+  margin-top: 50px;
+}
+
+.SD, .ED {
+  margin-right: 50px;
+}
+
+

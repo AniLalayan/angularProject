@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "name": "Shirak",
+    "countryId": 1
+  },
+  {
+    "id": 2,
+    "name": "Ararat",
+    "countryId": 1
+  },
+  {
+    "id": 3,
+    "name": "Armavir",
+    "countryId": 1
+  },
+  {
+    "id": 4,
+    "name": "Askeran",
+    "countryId": 2
+  },
+  {
+    "id": 5,
+    "name": "Hadrut",
+    "countryId": 2
+  },
+  {
+    "id": 6,
+    "name": "Martuni",
+    "countryId": 2
+  }
+]
+

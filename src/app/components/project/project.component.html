@@ -1,0 +1,6 @@
+<form [formGroup]="projectForm" *ngIf="isReady">
+  <app-header></app-header>
+  <app-sample [project]="project"></app-sample>
+  <app-sectors [project]="project"></app-sectors>
+  <app-locations [project]="project"></app-locations>
+</form>

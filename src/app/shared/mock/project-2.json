@@ -1,0 +1,33 @@
+{
+  "id": 2,
+  "code": "aas46",
+  "title": "Title2",
+  "description": "This is project 2",
+  "implementationStatusId": 4,
+  "plannedStartDate": 10102010,
+  "plannedEndDate": 20102014,
+  "sectors": [
+    {
+      "id": 2,
+      "percent": 20
+    },
+    {
+      "id": 3,
+      "percent": 80
+    }
+  ],
+  "location": [
+    {
+      "id": 10,
+      "countryId": 2,
+      "districtId": 5,
+      "percent": 20
+    },
+    {
+      "id": 11,
+      "countryId": 1,
+      "districtId": 2,
+      "percent": 80
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+<div class="Sample" [formGroup]="projectForm">
+  <h2>SAMPLE</h2>
+  <div>
+    <div>
+      <div >
+        <mat-form-field class="ProjectCodeInput">
+          <input matInput placeholder="Project Code" formControlName="projectCodeFormControl"  required >
+        </mat-form-field>
+        <mat-form-field class="ProjectTitleInput">
+          <input matInput placeholder="Project Title" formControlName="projectTitleFormControl" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="DescriptionInput">
+          <textarea matInput placeholder="Description"  formControlName="projectDescription"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="dates">
+    <mat-form-field class="status">
+      <mat-select  name="status" placeholder="Implementation Status" formControlName='projectImplementationStatusId' required [value]="project.implementationStatusId">
+        <mat-option *ngFor="let status of statuses" [value]="status.id" >
+          {{status.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="SD">
+      <input matInput [matDatepicker]="picker1" placeholder="Planned Start Date" formControlName='projectPlannedStartDate' required>
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="ED">
+      <input matInput [matDatepicker]="picker2" placeholder="Planned End Date" formControlName="projectPlannedEndDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <span class="Duration">Duration</span>
+    <span  class="Duration" *ngIf="duration() == 1 || duration() == 0 || duration() == null">{{duration()}} day</span>
+    <span  class="Duration" *ngIf="!(duration() == 1 || duration() == 0 || duration() == null)">{{duration()}} days</span>
+
+  </div>
+
+</div>
+
