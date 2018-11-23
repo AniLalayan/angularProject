@@ -1,4 +1,4 @@
-<div class="Sectors" *ngIf="isReady">
+<div class="Sectors" *ngIf="isReady" [formGroup]="sectorForm">
   <h2>Sectors</h2>
 
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -18,20 +18,22 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let i; columns: displayedColumns;"></tr>
   </table>
+
   <div class="add">
     <mat-form-field class="select">
-      <mat-select  name="sector">
-        <mat-option *ngFor="let sector of sectorsList" [value]="sector.name">
+      <mat-select  name="sector" [(value)]="selectedSectorId" formControlName="sectorNameFormControl">
+        <mat-option *ngFor="let sector of sectorsList" [value]="sector.id" >
           {{sector.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="percent">
-      <input matInput placeholder="%" class="percent">
+      <input matInput placeholder="%" class="percent" formControlName="sectorPercentFormControl">
     </mat-form-field>
 
-    <button class="AddBtn" (click)="addSector()">ADD</button>
+    <button class="AddBtn" (click)="addNewSector()">ADD</button>
   </div>
+
 </div>
 

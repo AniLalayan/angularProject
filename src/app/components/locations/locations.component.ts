@@ -7,6 +7,8 @@ import {ProjectsService} from '../../shared/api/projects.service';
 import {Project} from '../../shared/model/project.model';
 import {Location} from '../../shared/model/location.model';
 import {zip} from 'rxjs';
+import {FormGroup} from '@angular/forms';
+import {selectValueAccessor} from '@angular/forms/src/directives/shared';
 
 @Component({
   selector: 'app-locations',
@@ -16,53 +18,7 @@ import {zip} from 'rxjs';
 
 export class LocationsComponent implements OnInit {
 
-  // countries: Country[] = [
-  //   {
-  //     'id': 1,
-  //     'name': 'Armenia'
-  //   },
-  //   {
-  //     'id': 2,
-  //     'name': 'Artsakh'
-  //   }
-  // ];
-  //
-  // districts: District[] = [
-  //   {
-  //     'id': 1,
-  //     'name': 'Shirak',
-  //     'countryId': 1
-  //   },
-  //   {
-  //     'id': 2,
-  //     'name': 'Ararat',
-  //     'countryId': 1
-  //   },
-  //   {
-  //     'id': 3,
-  //     'name': 'Armavir',
-  //     'countryId': 1
-  //   },
-  //   {
-  //     'id': 4,
-  //     'name': 'Askeran',
-  //     'countryId': 2
-  //   },
-  //   {
-  //     'id': 5,
-  //     'name': 'Hadrut',
-  //     'countryId': 2
-  //   },
-  //   {
-  //     'id': 6,
-  //     'name': 'Martuni',
-  //     'countryId': 2
-  //   }
-  // ];
-
   @Input() project: Project;
-  // @Input() countries: Country[];
-  // @Input() districts: District[];
 
   constructor(public dialog: MatDialog, private projectService: ProjectsService) {
   }
@@ -72,7 +28,13 @@ export class LocationsComponent implements OnInit {
   countries: Country[];
   districts: District[];
 
+  selectedPopupCountryId: number;
+  selectedDistrictId: number;
+  selectedPercent: number;
+
+
   @ViewChild(MatSort) sort: MatSort;
+  @Input() locationForm: FormGroup;
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.project.location);
@@ -110,13 +72,18 @@ export class LocationsComponent implements OnInit {
       return this.districts.find(value => value.id === id).name;
     }
   }
+  addNewLocation() {
+    const newLocation = {
+      'id': null,
+      'countryId': this.selectedPopupCountryId,
+      'districtId': this.selectedDistrictId,
+      'percent': this.selectedPercent
+    };
+    this.dataSource.data = [...this.dataSource.data, newLocation];
+    this.selectedPopupCountryId = null;
+    this.selectedDistrictId = null;
+    this.selectedPercent = null;
+  }
 }
 
-// export interface LocationPopupData {
-//   countryId: number;
-//   countries: Array<Country>;
-//   districtId: number;
-//   districts: Array<District>;
-//   percent: number;
-// }
 

@@ -24,7 +24,7 @@ export class ProjectListComponent implements OnInit {
   //   {'project': 'Project 2'},
   // ];
 
-  displayedColumns: string[] = ['id', 'title'];
+  displayedColumns: string[] = ['id', 'title', 'editIcon', 'deleteIcon'];
   public dataSource;
 
   @ViewChild(MatSort) sort: MatSort;

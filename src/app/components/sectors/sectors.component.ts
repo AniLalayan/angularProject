@@ -4,6 +4,7 @@ import {Sector} from '../../shared/model/sector.model';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProjectsService} from '../../shared/api/projects.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-sectors',
@@ -16,20 +17,23 @@ export class SectorsComponent implements OnInit {
   @Input() project: Project;
   isReady = false;
 
-  constructor(private service: ProjectsService) {
+  constructor(private service: ProjectsService, private http: HttpClient) {
   }
 
   public sectorsList: Sector[] = [];
-  public dataSource: MatTableDataSource<Sector>;
+  public dataSource: MatTableDataSource<any>;
+  public selectedSectorId;
   displayedColumns: string[] = ['name', 'percent'];
 
+
   @ViewChild(MatSort) sort: MatSort;
+  @Input() sectorForm: FormGroup;
 
   ngOnInit() {
     this.service.getSectors().subscribe(data => {
       this.sectorsList = data;
       this.isReady = true;
-    });
+    })
     this.dataSource = new MatTableDataSource(this.project.sectors);
     this.dataSource.sort = this.sort;
   }
@@ -39,7 +43,13 @@ export class SectorsComponent implements OnInit {
     return this.sectorsList.find(value => value.id === id).name;
   }
 
-  addSector() {
-
+  addNewSector() {
+    const newSector = {
+      'id': this.selectedSectorId,
+      'percent': +this.sectorForm.controls.sectorPercentFormControl.value
+    };
+    this.dataSource.data = [...this.dataSource.data, newSector];
+    this.selectedSectorId = null;
+    this.sectorForm.controls.sectorPercentFormControl.setValue(null);
   }
 }

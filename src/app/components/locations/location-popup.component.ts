@@ -1,11 +1,9 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-// import {LocationPopupData} from './locations.component';
-import {Country} from '../../shared/model/country.model';
-import {District} from '../../shared/model/district.model';
-import {Location} from '../../shared/model/location.model';
-
-import {ProjectsService} from '../../shared/api/projects.service';
+import { ProjectsService } from '../../shared/api/projects.service';
+import { District } from '../../shared/model/district.model';
+import { Country } from '../../shared/model/country.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -16,22 +14,11 @@ import {ProjectsService} from '../../shared/api/projects.service';
 
 export class LocationPopupComponent implements OnInit {
 
-  // public country = new Country();
-  // public district = new District();
-  // public location = new Location();
-
-  // locationForms = new FormGroup({
-  //   locationPopupCountry: new FormControl(this.country.name, [Validators.required]),
-  //   locationPopupDistrict: new FormControl(this.district.name, [Validators.required]),
-  //   locationPopupPercent: new FormControl(this.location.percent)
-  // })
-
   selectedCountryId: number;
   countries: Country[] = [];
   allDistricts: District[] = [];
-  districts:  Array<any> = [];
-
-
+  districts: Array<any> = [];
+  @Input() locationForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<LocationPopupComponent>,
@@ -59,4 +46,12 @@ export class LocationPopupComponent implements OnInit {
     this.dialogRef.close();
   }
 }
+
+// export interface LocationPopupData {
+//   countryId: number;
+//   countries: Array<Country>;
+//   dsitrictId: number;
+//   districts: Array<District>;
+//   percent: number;
+// }
 

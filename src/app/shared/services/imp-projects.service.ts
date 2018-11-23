@@ -70,4 +70,5 @@ export class ImpProjectsService extends ProjectsService {
   getDistricts() {
     return this.http.get('src/app/shared/mock/district.json');
   }
+
 }

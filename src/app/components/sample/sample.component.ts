@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ImplementationStatus} from '../../shared/model/implementation-status.model';
-import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProjectsService} from '../../shared/api/projects.service';
 
 
@@ -19,11 +19,12 @@ export class SampleComponent implements OnInit {
   @Input()
   set project(value) {
     this._project = value;
-    this.initializeForm();
   }
 
+  @Input() sampleForm: FormGroup;
+
   private _project;
-  projectForm: any;
+
 
 
   constructor(private service: ProjectsService) {
@@ -43,17 +44,6 @@ export class SampleComponent implements OnInit {
     } else {
       return null;
     }
-  }
-
-  private initializeForm() {
-    this.projectForm = new FormGroup({
-      projectCodeFormControl: new FormControl(this._project.code, [Validators.required]),
-      projectTitleFormControl: new FormControl(this._project.title, [Validators.required]),
-      projectDescription: new FormControl(this._project.description),
-      projectImplementationStatusId: new FormControl(this._project.implementationStatusId, [Validators.required]),
-      projectPlannedStartDate: new FormControl(this._project.plannedStartDate, [Validators.required]),
-      projectPlannedEndDate: new FormControl(this._project.plannedEndDate),
-    });
   }
 
   // ProjectCodeErrorMessage() {
