@@ -4,6 +4,7 @@ import {Observable, zip} from 'rxjs';
 import {Project} from '../model/project.model';
 import {HttpClient} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
+import {of} from 'rxjs';
 
 
 @Injectable()
@@ -16,20 +17,41 @@ export class ImpProjectsService extends ProjectsService {
     super();
   }
 
-  createProject(): Observable<Project> {
-    return;
+  addProject(project: Project): Observable<any> {
+    this.projects.push(project);
+    return of({success: true});
   }
 
+  /*
+      return zip(
+        this.http.get<Project>('src/app/shared/mock/project-1.json'),
+        this.http.get<Project>('src/app/shared/mock/project-2.json'),
+        this.http.get<Project>('src/app/shared/mock/project-3.json')
+      ).pipe(tap(data => {
+        if (!this.projects) {
+          this.projects = data;
+        } else {
+          return this.projects;
+        }
+      }));
+   */
   getProjects(): Observable<Project[]> {
-    return zip(
-      this.http.get<Project>('src/app/shared/mock/project-1.json'),
-      this.http.get<Project>('src/app/shared/mock/project-2.json'),
-      this.http.get<Project>('src/app/shared/mock/project-3.json')
-    ).pipe(tap(data => {
-      if (!this.projects) {
-        this.projects = data;
-      }
-    }));
+    if (!this.projects) {
+      return zip(
+        this.http.get<Project>('src/app/shared/mock/project-1.json'),
+        this.http.get<Project>('src/app/shared/mock/project-2.json'),
+        this.http.get<Project>('src/app/shared/mock/project-3.json')
+      ).pipe(
+        map(
+          res => {
+            this.projects = res;
+            return this.projects;
+          }
+        )
+      );
+    } else {
+      return of(this.projects);
+    }
   }
 
   deleteProject(): Observable<Project> {

@@ -1,10 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource} from '@angular/material';
-import {ImplicitReceiver} from '@angular/compiler';
-import {ImpProjectsService} from '../../shared/services/imp-projects.service';
 import {ProjectsService} from '../../shared/api/projects.service';
 import {Project} from '../../shared/model/project.model';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -15,7 +13,10 @@ import {Router} from '@angular/router';
 
 export class ProjectListComponent implements OnInit {
 
-  constructor(private projectService: ProjectsService, private router: Router) {
+  constructor(private projectService: ProjectsService,
+              private router: Router,
+              private route: ActivatedRoute
+  ) {
   }
 
   public projects: Project[];
@@ -40,6 +41,10 @@ export class ProjectListComponent implements OnInit {
       this.dataSource = new MatTableDataSource(tableData);
       this.dataSource.sort = this.sort;
     });
+  }
+
+  addProject() {
+    this.router.navigate([-1], {relativeTo: this.route});
   }
 
   // navigateTo(id: number) {

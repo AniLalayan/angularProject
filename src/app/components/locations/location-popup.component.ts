@@ -18,7 +18,7 @@ export class LocationPopupComponent implements OnInit {
   countries: Country[] = [];
   allDistricts: District[] = [];
   districts: Array<any> = [];
-  @Input() locationForm: FormGroup;
+  // @Input() locationForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<LocationPopupComponent>,

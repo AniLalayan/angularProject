@@ -1,5 +1,4 @@
 .Sample {
-  height: 520px;
   top: 175px;
   margin: 0px auto 200px;
   background-color: #FFFFFF;
@@ -10,6 +9,7 @@
   box-sizing: border-box;
   padding-left: 25px;
   padding-top: 3px;
+  padding-bottom: 40px;
   position: relative;
 }
 

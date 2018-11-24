@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component ({
   selector: 'app-header',
@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 
 })
 
-
 export class HeaderComponent {
-
+  // 3 hat output
+  @Output() cancle = new EventEmitter();
 }

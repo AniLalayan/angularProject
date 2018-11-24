@@ -1,5 +1,4 @@
 .Location {
-  height: 380px;
   margin: 0px auto 25px;
   background-color: #FFFFFF;
   border: 1px;
@@ -9,6 +8,7 @@
   box-sizing: border-box;
   padding-left: 25px;
   padding-top: 3px;
+  padding-bottom: 40px;
   position: relative;
 }
 
@@ -55,7 +55,7 @@ h2 {
 }
 
 table {
-  width: 70%;
+  width: 98%;
 }
 
 th.mat-sort-header-sorted {

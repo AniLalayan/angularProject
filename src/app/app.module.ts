@@ -14,7 +14,6 @@ import {MatInputModule} from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
 import {HttpClientModule} from '@angular/common/http';
 import {LocationPopupComponent} from './components/locations/location-popup.component';
-import {SampleService} from './shared/services/sample.service';
 import {MatSortModule} from '@angular/material/sort';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ProjectListComponent} from './components/project_list/project-list.component';
@@ -22,6 +21,7 @@ import {ProjectsService} from './shared/api/projects.service';
 import {ImpProjectsService} from './shared/services/imp-projects.service';
 import {RouterModule, Routes} from '@angular/router';
 import {ProjectComponent} from './components/project/project.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 const appRoutes: Routes = [
   { path: 'projects', component: ProjectListComponent},
@@ -56,9 +56,10 @@ const appRoutes: Routes = [
     MatSortModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MatSnackBarModule
   ],
-  providers: [SampleService,
+  providers: [
     {provide: ProjectsService, useClass: ImpProjectsService}],
   entryComponents: [LocationPopupComponent],
   bootstrap: [AppComponent]

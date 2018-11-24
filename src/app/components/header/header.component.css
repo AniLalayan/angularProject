@@ -7,7 +7,7 @@
   width: 100%;
   height: 150px;
   background-color: rgba(85, 170, 65, 1);
-  /*background-image: url('https://d26uhratvi024l.cloudfront.net/gsc/PLJI1H/5c/59/5b/5c595b5a726642ca941af05a9d660706/images/1__general_information/u0_state0.png?token=74c1c5bee1761e27d89eeb5711b65c77');*/
+  background-image: url('src/assets/header-bg.png');
   background-position: center top;
 }
 

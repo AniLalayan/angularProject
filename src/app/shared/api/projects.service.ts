@@ -8,7 +8,7 @@ import {ImplementationStatus} from '../model/implementation-status.model';
 
 export abstract class ProjectsService {
 
-  abstract createProject(): Observable<Project> ;
+  abstract addProject(project: Project): Observable<any> ;
 
   abstract getProjects(): Observable<Project[]> ;
 

@@ -53,7 +53,8 @@ export class LocationsComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(LocationPopupComponent, {
-      width: '250px',
+      width: '330px',
+      height: '500px'
     });
 
     dialogRef.afterClosed().subscribe(() => {
@@ -79,10 +80,12 @@ export class LocationsComponent implements OnInit {
       'districtId': this.selectedDistrictId,
       'percent': this.selectedPercent
     };
-    this.dataSource.data = [...this.dataSource.data, newLocation];
-    this.selectedPopupCountryId = null;
-    this.selectedDistrictId = null;
-    this.selectedPercent = null;
+    if (this.selectedPopupCountryId && this.selectedDistrictId && this.selectedPercent) {
+      this.dataSource.data = [...this.dataSource.data, newLocation];
+      this.selectedPopupCountryId = null;
+      this.selectedDistrictId = null;
+      this.selectedPercent = null;
+    }
   }
 }
 

@@ -1,13 +1,12 @@
+span {
+  margin-top: 15px;
+  font-size: 30px;
+}
+
 .asterisk {
   color: #b94a48;
   padding-left: 4px;
 }
- .popup {
-   font-size: 15px;
-   font-weight: normal;
-   line-height: 36px;
-   color: #878787;
- }
 
 .btn {
   background-color: #fff;
@@ -24,3 +23,16 @@
   box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.24);
 }
 
+.select, .percent {
+  margin-top: 20px;
+  width: 270px;
+  font-size: 20px;
+}
+
+.percent {
+  margin-bottom: 10px;
+}
+
+img {
+  margin-left: 98%;
+}
