@@ -1,9 +1,10 @@
-import { ProjectsService } from '../../shared/api/projects.service';
-import { District } from '../../shared/model/district.model';
-import { Country } from '../../shared/model/country.model';
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
-import { FormGroup } from '@angular/forms';
+import {ProjectsService} from '../../shared/api/projects.service';
+import {District} from '../../shared/model/district.model';
+import {Country} from '../../shared/model/country.model';
+import {Location} from '../../shared/model/location.model';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -15,14 +16,17 @@ import { FormGroup } from '@angular/forms';
 export class LocationPopupComponent implements OnInit {
 
   selectedCountryId: number;
+  selectedDistrictId: number;
+  percent: number = null;
   countries: Country[] = [];
   allDistricts: District[] = [];
   districts: Array<any> = [];
+
   // @Input() locationForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<LocationPopupComponent>,
-    // @Inject(MAT_DIALOG_DATA) public data: LocationPopupData,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private service: ProjectsService
   ) {
   }
@@ -42,8 +46,12 @@ export class LocationPopupComponent implements OnInit {
     this.districts = this.allDistricts.filter(district => district.countryId === this.selectedCountryId);
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  confirm(): void {
+    const loc = new Location();
+    loc.percent = this.data.form.controls.locationPercentFormControl.value;
+    loc.countryId = this.selectedCountryId;
+    loc.districtId = this.selectedDistrictId;
+    this.dialogRef.close(loc);
   }
 }
 

@@ -25,7 +25,7 @@ export class ProjectListComponent implements OnInit {
   //   {'project': 'Project 2'},
   // ];
 
-  displayedColumns: string[] = ['id', 'title', 'editIcon', 'deleteIcon'];
+  displayedColumns: string[] = ['id', 'editIcon', 'deleteIcon'];
   public dataSource;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -36,7 +36,7 @@ export class ProjectListComponent implements OnInit {
       this.projects = x;
       const tableData = [];
       for (const i of x) {
-        tableData.push({'id': i.id, 'title': i.title});
+        tableData.push({'id': i.id});
       }
       this.dataSource = new MatTableDataSource(tableData);
       this.dataSource.sort = this.sort;

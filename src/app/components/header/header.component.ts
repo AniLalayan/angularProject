@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Location} from '@angular/common';
 
-@Component ({
+@Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
@@ -9,5 +10,13 @@ import {Component, EventEmitter, Output} from '@angular/core';
 
 export class HeaderComponent {
   // 3 hat output
-  @Output() cancle = new EventEmitter();
+  @Input() projectForm;
+
+  constructor(private location: Location) {
+  }
+
+  cancel(): void {
+    this.location.back();
+  }
+
 }

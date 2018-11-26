@@ -46,8 +46,8 @@ export class ProjectComponent implements OnInit {
         projectCodeFormControl: new FormControl(this.project.code, [Validators.required]),
         projectTitleFormControl: new FormControl(this.project.title, [Validators.required]),
         projectDescription: new FormControl(this.project.description),
-        projectImplementationStatusId: new FormControl(this.project.implementationStatusId, [Validators.required]),
-        projectPlannedStartDate: new FormControl(this.project.plannedStartDate, [Validators.required]),
+        projectImplementationStatusId: new FormControl(this.project.implementationStatusId),
+        projectPlannedStartDate: new FormControl(this.project.plannedStartDate),
         projectPlannedEndDate: new FormControl(this.project.plannedEndDate)
       }),
       sectorForm: new FormGroup({
@@ -55,10 +55,19 @@ export class ProjectComponent implements OnInit {
         sectorPercentFormControl: new FormControl(null)
       }),
       locationForm: new FormGroup({
-        locationCountryFormControl: new FormControl('', [Validators.required]),
-        locationDistrictFormControl: new FormControl('', [Validators.required]),
+        locationCountryFormControl: new FormControl(''),
+        locationDistrictFormControl: new FormControl(''),
         locationPercentFormControl: new FormControl('')
       }),
     });
+  }
+  submit() {
+      this.project.code = this.projectForm.controls.sampleForm.controls.projectCodeFormControl.value;
+      this.project.title = this.projectForm.controls.sampleForm.controls.projectTitleFormControl.value;
+      this.project.description = this.projectForm.controls.sampleForm.controls.projectDescription.value;
+      this.project.implementationStatusId = this.projectForm.controls.sampleForm.controls.projectImplementationStatusId.value;
+      this.project.plannedStartDate = this.projectForm.controls.sampleForm.controls.projectPlannedStartDate.value;
+      this.project.plannedEndDate = this.projectForm.controls.sampleForm.controls.projectPlannedEndDate.value;
+
   }
 }

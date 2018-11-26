@@ -6,14 +6,14 @@
   <!-- id Column -->
   <ng-container matColumnDef="id" >
     <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-    <td mat-cell *matCellDef="let i"> Project {{i.id}} </td>
+    <td mat-cell *matCellDef="let i" [routerLink]="[i.id]"> Project {{i.id}} </td>
   </ng-container>
 
   <!-- title Column -->
-  <ng-container matColumnDef="title" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
-    <td mat-cell *matCellDef="let i"> {{i.title}} </td>
-  </ng-container>
+  <!--<ng-container matColumnDef="title" >-->
+    <!--<th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>-->
+    <!--<td mat-cell *matCellDef="let i"> {{i.title}} </td>-->
+  <!--</ng-container>-->
 
   <ng-container matColumnDef="editIcon" >
     <th mat-header-cell *matHeaderCellDef></th>
@@ -26,7 +26,7 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let i; columns: displayedColumns;" [routerLink]="[i.id]"></tr>
+  <tr mat-row *matRowDef="let i; columns: displayedColumns;" ></tr>
 </table>
 
 

@@ -10,6 +10,6 @@ export class Project {
   public implementationStatusId: number;
   public plannedStartDate: Date;
   public plannedEndDate: Date;
-  public sectors: Sector[];
-  public location: Location[];
+  public sectors: Sector[] = [];
+  public location: Location[] = [];
 }

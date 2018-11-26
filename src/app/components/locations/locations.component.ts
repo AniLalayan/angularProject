@@ -5,10 +5,8 @@ import {District} from '../../shared/model/district.model';
 import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 import {ProjectsService} from '../../shared/api/projects.service';
 import {Project} from '../../shared/model/project.model';
-import {Location} from '../../shared/model/location.model';
-import {zip} from 'rxjs';
 import {FormGroup} from '@angular/forms';
-import {selectValueAccessor} from '@angular/forms/src/directives/shared';
+import {Location} from '../../shared/model/location.model';
 
 @Component({
   selector: 'app-locations',
@@ -24,20 +22,22 @@ export class LocationsComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['country', 'district', 'percent'];
-  dataSource: MatTableDataSource<Location>;
+  dataSource: MatTableDataSource<any>;
   countries: Country[];
   districts: District[];
-
-  selectedPopupCountryId: number;
-  selectedDistrictId: number;
-  selectedPercent: number;
-
 
   @ViewChild(MatSort) sort: MatSort;
   @Input() locationForm: FormGroup;
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.project.location);
+    // this.dataSource = new MatTableDataSource(this.project.location);
+    const loc = new Location();
+    loc.percent = 12;
+    loc.countryId = 1;
+    loc.districtId = 1;
+    this.dataSource = new MatTableDataSource([
+      loc
+    ])
     this.dataSource.sort = this.sort;
     this.projectService.getCountries().subscribe(
       res => {
@@ -54,11 +54,12 @@ export class LocationsComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(LocationPopupComponent, {
       width: '330px',
-      height: '500px'
+      height: '500px',
+      data: {form: this.locationForm}
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((data: Location) => {
+      this.addNewLocation(data);
     });
   }
 
@@ -73,19 +74,9 @@ export class LocationsComponent implements OnInit {
       return this.districts.find(value => value.id === id).name;
     }
   }
-  addNewLocation() {
-    const newLocation = {
-      'id': null,
-      'countryId': this.selectedPopupCountryId,
-      'districtId': this.selectedDistrictId,
-      'percent': this.selectedPercent
-    };
-    if (this.selectedPopupCountryId && this.selectedDistrictId && this.selectedPercent) {
-      this.dataSource.data = [...this.dataSource.data, newLocation];
-      this.selectedPopupCountryId = null;
-      this.selectedDistrictId = null;
-      this.selectedPercent = null;
-    }
+  addNewLocation(newLocation: Location) {
+    this.dataSource.data.push(newLocation);
+    this.dataSource = new MatTableDataSource<any>(this.dataSource.data);
   }
 }
 
