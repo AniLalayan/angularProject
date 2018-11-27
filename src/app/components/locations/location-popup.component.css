@@ -36,3 +36,8 @@ span {
 img {
   margin-left: 98%;
 }
+
+button[disabled] {
+  background-color: #eeeeee;
+  color: #878787;
+}

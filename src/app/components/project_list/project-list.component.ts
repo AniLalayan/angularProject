@@ -13,26 +13,45 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 export class ProjectListComponent implements OnInit {
 
-  constructor(private projectService: ProjectsService,
+  constructor(private service: ProjectsService,
               private router: Router,
               private route: ActivatedRoute
   ) {
   }
 
   public projects: Project[];
-  // public tableData = [
-  //   {'project': 'Project 1'},
-  //   {'project': 'Project 2'},
-  // ];
+  public dataSource;
 
   displayedColumns: string[] = ['id', 'editIcon', 'deleteIcon'];
-  public dataSource;
 
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
 
-    this.projectService.getProjects().subscribe(x => {
+  this.initProjects();
+  }
+
+  addProject() {
+    this.router.navigate([-1], {relativeTo: this.route});
+  }
+
+  deleteProject(id: number) {
+    this.service.deleteProject(id).subscribe(response => {
+      if (response.success) {
+        this.initProjects();
+      } else {
+        alert('project dont deleted');
+      }
+    });
+  }
+
+  // navigateTo(id: number) {
+  //   // this.router.navigate([`project/${id}`]);
+  //   this.router.navigate([`project`]);
+  // }
+
+  private initProjects() {
+    this.service.getProjects().subscribe(x => {
       this.projects = x;
       const tableData = [];
       for (const i of x) {
@@ -43,12 +62,7 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
-  addProject() {
-    this.router.navigate([-1], {relativeTo: this.route});
+  getProjectTitle(id: number): string {
+    return this.projects.find(value => value.id === id).title;
   }
-
-  // navigateTo(id: number) {
-  //   // this.router.navigate([`project/${id}`]);
-  //   this.router.navigate([`project`]);
-  // }
 }

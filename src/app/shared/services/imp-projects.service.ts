@@ -5,15 +5,16 @@ import {Project} from '../model/project.model';
 import {HttpClient} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
-
+import {Location} from '@angular/common';
 
 @Injectable()
 
 export class ImpProjectsService extends ProjectsService {
 
+  private static id = 4;
   public projects: Project[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private location: Location) {
     super();
   }
 
@@ -22,19 +23,6 @@ export class ImpProjectsService extends ProjectsService {
     return of({success: true});
   }
 
-  /*
-      return zip(
-        this.http.get<Project>('src/app/shared/mock/project-1.json'),
-        this.http.get<Project>('src/app/shared/mock/project-2.json'),
-        this.http.get<Project>('src/app/shared/mock/project-3.json')
-      ).pipe(tap(data => {
-        if (!this.projects) {
-          this.projects = data;
-        } else {
-          return this.projects;
-        }
-      }));
-   */
   getProjects(): Observable<Project[]> {
     if (!this.projects) {
       return zip(
@@ -54,11 +42,26 @@ export class ImpProjectsService extends ProjectsService {
     }
   }
 
-  deleteProject(): Observable<Project> {
-    return;
+  deleteProject(id: number): Observable<any> {
+    const index = this.projects.findIndex(el => el.id === id);
+    if (index > -1) {
+      this.projects.splice(index, 1);
+      return of({success: true});
+    }
+    return of({
+      success: false,
+      message: 'aaa',
+    });
   }
 
   getProjectById(id: number): Observable<Project> {
+    let project: Project;
+    if (this.projects) {
+      project = this.projects.find(el => el.id === id);
+    }
+    if (project) {
+      return of(project);
+    }
     return this.http.get<Project>('src/app/shared/mock/project-' + id + '.json').pipe(
       map(data => this.convert(data))
     );
@@ -93,4 +96,28 @@ export class ImpProjectsService extends ProjectsService {
     return this.http.get('src/app/shared/mock/district.json');
   }
 
+  saveProject(project) {
+    if (project && project.title && project.code) {
+      if (project.id) {
+        const index = this.projects.findIndex(el => el.id === project.id);
+        this.projects[index] = project;
+        return of({
+          success: true
+        });
+      } else {
+        project.id = ImpProjectsService.id++;
+        this.projects.push(project);
+        return of({
+          success: true
+        });
+      }
+    }
+    return of({
+      success: false
+    });
+  }
+
+  saveAndCloseProject(project) {
+    this.saveProject(project);
+    this.location.back();
 }

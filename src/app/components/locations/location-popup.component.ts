@@ -4,7 +4,6 @@ import {Country} from '../../shared/model/country.model';
 import {Location} from '../../shared/model/location.model';
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -21,8 +20,6 @@ export class LocationPopupComponent implements OnInit {
   countries: Country[] = [];
   allDistricts: District[] = [];
   districts: Array<any> = [];
-
-  // @Input() locationForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<LocationPopupComponent>,

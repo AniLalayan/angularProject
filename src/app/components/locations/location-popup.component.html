@@ -21,7 +21,8 @@
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button class="btn" (click)="confirm()">Ok</button>
+    <button class="btn" (click)="confirm()" *ngIf="!selectedCountryId && !selectedDistrictId && !data.form.controls.locationPercentFormControl.value" disabled>Ok</button>
+    <button class="btn" (click)="confirm()" *ngIf="(selectedCountryId && selectedDistrictId) && data.form.controls.locationPercentFormControl.value" >Ok</button>
     <!--<button class="btn" (click)="onNoClick()">Close</button>-->
   </div>
 </div>

@@ -3,6 +3,7 @@ import {Project} from '../../shared/model/project.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {ProjectsService} from '../../shared/api/projects.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-project',
@@ -55,19 +56,23 @@ export class ProjectComponent implements OnInit {
         sectorPercentFormControl: new FormControl(null)
       }),
       locationForm: new FormGroup({
-        locationCountryFormControl: new FormControl(''),
-        locationDistrictFormControl: new FormControl(''),
-        locationPercentFormControl: new FormControl('')
+        locationCountryFormControl: new FormControl('', [Validators.required]),
+        locationDistrictFormControl: new FormControl('', [Validators.required]),
+        locationPercentFormControl: new FormControl(null)
       }),
     });
   }
-  submit() {
-      this.project.code = this.projectForm.controls.sampleForm.controls.projectCodeFormControl.value;
-      this.project.title = this.projectForm.controls.sampleForm.controls.projectTitleFormControl.value;
-      this.project.description = this.projectForm.controls.sampleForm.controls.projectDescription.value;
-      this.project.implementationStatusId = this.projectForm.controls.sampleForm.controls.projectImplementationStatusId.value;
-      this.project.plannedStartDate = this.projectForm.controls.sampleForm.controls.projectPlannedStartDate.value;
-      this.project.plannedEndDate = this.projectForm.controls.sampleForm.controls.projectPlannedEndDate.value;
 
+  submit() {
+    this.project.code = this.projectForm.controls.sampleForm.controls.projectCodeFormControl.value;
+    this.project.title = this.projectForm.controls.sampleForm.controls.projectTitleFormControl.value;
+    this.project.description = this.projectForm.controls.sampleForm.controls.projectDescription.value;
+    this.project.implementationStatusId = this.projectForm.controls.sampleForm.controls.projectImplementationStatusId.value;
+    this.project.plannedStartDate = this.projectForm.controls.sampleForm.controls.projectPlannedStartDate.value;
+    this.project.plannedEndDate = this.projectForm.controls.sampleForm.controls.projectPlannedEndDate.value;
+    this.service.saveProject(this.project);
   }
-}
+
+  saveAndClose() {
+    this.service.saveAndCloseProject(this.project);
+  }}

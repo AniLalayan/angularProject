@@ -5,6 +5,7 @@ import {MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProjectsService} from '../../shared/api/projects.service';
 import {HttpClient} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-sectors',
@@ -24,7 +25,8 @@ export class SectorsComponent implements OnInit {
   public sectorsList: Sector[] = [];
   public dataSource: MatTableDataSource<any>;
   public selectedSectorId;
-  displayedColumns: string[] = ['name', 'percent'];
+  public percentSum = 0;
+  displayedColumns: string[] = ['name', 'percent', 'deleteIcon'];
 
 
   @ViewChild(MatSort) sort: MatSort;
@@ -32,8 +34,11 @@ export class SectorsComponent implements OnInit {
 
   ngOnInit() {
     this.service.getSectors().subscribe(data => {
-      this.sectorsList = data;
-      this.isReady = true;
+      if (this.percentSum <= 100) {
+        this.sectorsList = data;
+        this.isReady = true;
+
+      }
     });
     this.dataSource = new MatTableDataSource(this.project.sectors);
     this.dataSource.sort = this.sort;
@@ -48,8 +53,19 @@ export class SectorsComponent implements OnInit {
       'id': this.selectedSectorId,
       'percent': +this.sectorForm.controls.sectorPercentFormControl.value
     };
-    this.dataSource.data = [...this.dataSource.data, newSector];
+    this.percentSum += +this.sectorForm.controls.sectorPercentFormControl.value;
+    if (this.percentSum <= 100 && (this.selectedSectorId !== undefined && this.sectorForm.controls.sectorPercentFormControl.value !== null)) {
+      this.dataSource.data.push(newSector);
+      this.dataSource = new MatTableDataSource<any>(this.dataSource.data);
+    }
     this.selectedSectorId = null;
     this.sectorForm.controls.sectorPercentFormControl.setValue(null);
+  }
+
+  deleteSector(id: number) {
+    const index = this.sectorsList.findIndex(el => el.id === id);
+    if (index > -1) {
+      this.sectorsList.splice(index, 1);
+    }
   }
 }

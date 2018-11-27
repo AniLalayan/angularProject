@@ -1,6 +1,7 @@
 <div class="img"></div>
 <div class="Buttons">
   <button class="cancelButton" type="button" (click)="cancel()">CANCEL</button>
-  <button class="saveButton" type="submit" [disabled]="projectForm.invalid">SAVE</button>
-  <button class="saveCloseButton" type="button">SAVE & CLOSE</button>
+  <button class="saveButton" type="submit" *ngIf="project">SAVE</button>
+  <button class="saveButton" type="submit" *ngIf="!project">SAVE</button>
+  <button class="saveCloseButton" type="submit" (click)="saveAndClose()">SAVE & CLOSE</button>
 </div>

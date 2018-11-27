@@ -17,27 +17,19 @@ import {Location} from '../../shared/model/location.model';
 export class LocationsComponent implements OnInit {
 
   @Input() project: Project;
-
-  constructor(public dialog: MatDialog, private projectService: ProjectsService) {
-  }
+  @Input() locationForm: FormGroup;
+  @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: string[] = ['country', 'district', 'percent'];
   dataSource: MatTableDataSource<any>;
   countries: Country[];
   districts: District[];
 
-  @ViewChild(MatSort) sort: MatSort;
-  @Input() locationForm: FormGroup;
+  constructor(public dialog: MatDialog, private projectService: ProjectsService) {
+  }
 
   ngOnInit() {
-    // this.dataSource = new MatTableDataSource(this.project.location);
-    const loc = new Location();
-    loc.percent = 12;
-    loc.countryId = 1;
-    loc.districtId = 1;
-    this.dataSource = new MatTableDataSource([
-      loc
-    ])
+    this.dataSource = new MatTableDataSource(this.project.location);
     this.dataSource.sort = this.sort;
     this.projectService.getCountries().subscribe(
       res => {
@@ -75,8 +67,10 @@ export class LocationsComponent implements OnInit {
     }
   }
   addNewLocation(newLocation: Location) {
-    this.dataSource.data.push(newLocation);
-    this.dataSource = new MatTableDataSource<any>(this.dataSource.data);
+    if (newLocation.districtId && newLocation.countryId && newLocation.percent) {
+      this.dataSource.data.push(newLocation);
+      this.dataSource = new MatTableDataSource<any>(this.dataSource.data);
+    }
   }
 }
 

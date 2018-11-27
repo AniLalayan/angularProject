@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Location} from '@angular/common';
+import {ProjectsService} from '../../shared/api/projects.service';
 
 @Component({
   selector: 'app-header',
@@ -11,12 +12,17 @@ import {Location} from '@angular/common';
 export class HeaderComponent {
   // 3 hat output
   @Input() projectForm;
+  @Input() project;
 
-  constructor(private location: Location) {
+  constructor(private location: Location, private service: ProjectsService) {
   }
 
   cancel(): void {
     this.location.back();
+  }
+
+  saveAndClose() {
+    this.service.saveAndCloseProject(this.project);
   }
 
 }

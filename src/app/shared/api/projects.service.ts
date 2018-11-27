@@ -12,7 +12,7 @@ export abstract class ProjectsService {
 
   abstract getProjects(): Observable<Project[]> ;
 
-  abstract deleteProject(): Observable<Project>;
+  abstract deleteProject(id: number): Observable<any>;
 
   abstract getProjectById(id: number): Observable<Project>;
 
@@ -23,4 +23,8 @@ export abstract class ProjectsService {
   abstract getCountries();
 
   abstract getDistricts();
+
+  abstract saveProject(project: Project);
+
+  abstract saveAndCloseProject(project: Project);
 }
