@@ -21,12 +21,10 @@ export class SampleComponent implements OnInit {
   // set project(value) {
   //   this._project = value;
   // }
-  //
-  @Input() sampleForm: FormGroup;
-  //
   // private _project;
 
   @Input() project: Project;
+  @Input() sampleForm: FormGroup;
 
   constructor(private service: ProjectsService) {
   }
@@ -38,7 +36,7 @@ export class SampleComponent implements OnInit {
     this.service.getImplementationStatuses().subscribe(data => this.statuses = data);
   }
 
-  public duration(): number {
+  public duration() {
     if ((this.project.plannedEndDate && this.project.plannedStartDate)
       && (this.project.plannedEndDate.getTime() - this.project.plannedStartDate.getTime()) / (24 * 60 * 60 * 1000) >= 0) {
       return (this.project.plannedEndDate.getTime() - this.project.plannedStartDate.getTime()) / (24 * 60 * 60 * 1000);

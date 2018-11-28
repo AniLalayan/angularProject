@@ -15,7 +15,6 @@ import {Observable, of} from 'rxjs';
 
 export class SectorsComponent implements OnInit {
 
-  // public snackBar: MatSnackBar
   @Input() project: Project;
   isReady = false;
 
@@ -25,7 +24,6 @@ export class SectorsComponent implements OnInit {
   public sectorsList: Sector[] = [];
   public dataSource: MatTableDataSource<any>;
   public selectedSectorId;
-  public percentSum = 0;
   displayedColumns: string[] = ['name', 'percent', 'deleteIcon'];
 
 
@@ -34,11 +32,8 @@ export class SectorsComponent implements OnInit {
 
   ngOnInit() {
     this.service.getSectors().subscribe(data => {
-      if (this.percentSum <= 100) {
-        this.sectorsList = data;
-        this.isReady = true;
-
-      }
+      this.sectorsList = data;
+      this.isReady = true;
     });
     this.dataSource = new MatTableDataSource(this.project.sectors);
     this.dataSource.sort = this.sort;
@@ -53,16 +48,19 @@ export class SectorsComponent implements OnInit {
       'id': this.selectedSectorId,
       'percent': +this.sectorForm.controls.sectorPercentFormControl.value
     };
-    this.percentSum += +this.sectorForm.controls.sectorPercentFormControl.value;
-    if (this.percentSum <= 100 && (this.selectedSectorId !== undefined && this.sectorForm.controls.sectorPercentFormControl.value !== null)) {
+    let sum = 0;
+    if(this.dataSource.data) {
+      this.dataSource.data.forEach((value: any) => sum += value.percent);
+    }
+    if (sum < 100 && (this.selectedSectorId && this.sectorForm.controls.sectorPercentFormControl.value) && +this.sectorForm.controls.sectorPercentFormControl.value + sum <= 100) {
       this.dataSource.data.push(newSector);
       this.dataSource = new MatTableDataSource<any>(this.dataSource.data);
+      this.selectedSectorId = null;
     }
-    this.selectedSectorId = null;
     this.sectorForm.controls.sectorPercentFormControl.setValue(null);
   }
 
-   deleteSector(id) {
+  deleteSector(id) {
     const index = this.project.sectors.findIndex(el => el.id === id);
     if (index > -1) {
       this.project.sectors.splice(index, 1);

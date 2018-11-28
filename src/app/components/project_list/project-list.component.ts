@@ -45,11 +45,6 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
-  // navigateTo(id: number) {
-  //   // this.router.navigate([`project/${id}`]);
-  //   this.router.navigate([`project`]);
-  // }
-
   private initProjects() {
     this.service.getProjects().subscribe(x => {
       this.projects = x;

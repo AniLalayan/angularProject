@@ -83,3 +83,8 @@ th.mat-sort-header-sorted {
 .select {
   width: 250px;
 }
+
+.delete {
+  cursor: pointer;
+  margin-left: 50%;
+}

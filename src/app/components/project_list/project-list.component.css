@@ -44,3 +44,12 @@ th.mat-sort-header-sorted {
   margin-bottom: 50px;
 }
 
+.delete {
+  cursor: pointer;
+  margin-left: 85%;
+}
+
+.edit {
+  cursor: pointer;
+  margin-left: 250%;
+}

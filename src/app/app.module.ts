@@ -26,7 +26,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 const appRoutes: Routes = [
   { path: 'projects', component: ProjectListComponent},
   { path: 'projects/:id', component: ProjectComponent },
-  { path: '**', redirectTo: 'projects' },
+  // { path: 'view', component: ViewProjectComponent },
+  { path: '**', redirectTo: 'projects' }
 ];
 
 @NgModule({

@@ -3,8 +3,6 @@ import {Project} from '../../shared/model/project.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {ProjectsService} from '../../shared/api/projects.service';
-import {Location} from '@angular/common';
-import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-project',
@@ -76,6 +74,7 @@ export class ProjectComponent implements OnInit {
     this.service.saveProject(this.project);
   }
 
-  saveAndClose() {
-    this.service.saveAndCloseProject(this.project);
-  }}
+  // saveAndClose() {
+  //   this.service.saveAndCloseProject(this.project);
+  // }
+}
