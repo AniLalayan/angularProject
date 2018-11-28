@@ -12,7 +12,6 @@ import {Location} from '@angular/common';
 export class ImpProjectsService extends ProjectsService {
 
   private static id = 4;
-  public projects: Project[];
 
   constructor(private http: HttpClient, private location: Location) {
     super();
@@ -32,7 +31,12 @@ export class ImpProjectsService extends ProjectsService {
       ).pipe(
         map(
           res => {
-            this.projects = res;
+            this.projects = [];
+            if (res) {
+              for (let i of res) {
+                this.projects.push(this.convert(i));
+              }
+            }
             return this.projects;
           }
         )
@@ -55,12 +59,8 @@ export class ImpProjectsService extends ProjectsService {
   }
 
   getProjectById(id: number): Observable<Project> {
-    let project: Project;
     if (this.projects) {
-      project = this.projects.find(el => el.id === id);
-    }
-    if (project) {
-      return of(project);
+      return of (this.projects.find(el => el.id === +id));
     }
     return this.http.get<Project>('src/app/shared/mock/project-' + id + '.json').pipe(
       map(data => this.convert(data))
@@ -69,6 +69,7 @@ export class ImpProjectsService extends ProjectsService {
 
   convert(json: any): Project {
     const project = new Project();
+    project.id = json.id;
     project.code = json.code;
     project.title = json.title;
     project.description = json.description;
@@ -120,4 +121,5 @@ export class ImpProjectsService extends ProjectsService {
   saveAndCloseProject(project) {
     this.saveProject(project);
     this.location.back();
+  }
 }

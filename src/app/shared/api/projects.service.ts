@@ -8,6 +8,8 @@ import {ImplementationStatus} from '../model/implementation-status.model';
 
 export abstract class ProjectsService {
 
+  public projects: Project[];
+
   abstract addProject(project: Project): Observable<any> ;
 
   abstract getProjects(): Observable<Project[]> ;

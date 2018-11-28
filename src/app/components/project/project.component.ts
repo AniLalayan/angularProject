@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {ProjectsService} from '../../shared/api/projects.service';
 import {Location} from '@angular/common';
+import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-project',
@@ -20,7 +21,9 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+    if (!this.service.projects) {
+      this.service.getProjects().subscribe();
+    }    this.activatedRoute.params.subscribe(params => {
       if (params['id'] > 0) {
         this.service.getProjectById(params['id'])
           .subscribe(

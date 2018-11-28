@@ -10,7 +10,6 @@ import {ProjectsService} from '../../shared/api/projects.service';
 })
 
 export class HeaderComponent {
-  // 3 hat output
   @Input() projectForm;
   @Input() project;
 
@@ -24,5 +23,4 @@ export class HeaderComponent {
   saveAndClose() {
     this.service.saveAndCloseProject(this.project);
   }
-
 }

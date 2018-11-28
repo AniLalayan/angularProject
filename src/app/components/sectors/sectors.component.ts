@@ -62,10 +62,12 @@ export class SectorsComponent implements OnInit {
     this.sectorForm.controls.sectorPercentFormControl.setValue(null);
   }
 
-  deleteSector(id: number) {
-    const index = this.sectorsList.findIndex(el => el.id === id);
+   deleteSector(id) {
+    const index = this.project.sectors.findIndex(el => el.id === id);
     if (index > -1) {
-      this.sectorsList.splice(index, 1);
+      this.project.sectors.splice(index, 1);
+      this.dataSource = new MatTableDataSource(this.project.sectors);
+      this.dataSource.sort = this.sort;
     }
   }
 }
