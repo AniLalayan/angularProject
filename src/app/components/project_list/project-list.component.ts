@@ -22,7 +22,7 @@ export class ProjectListComponent implements OnInit {
   public projects: Project[];
   public dataSource;
 
-  displayedColumns: string[] = ['id', 'editIcon', 'deleteIcon'];
+  displayedColumns: string[] = ['id', 'deleteIcon'];
 
   @ViewChild(MatSort) sort: MatSort;
 

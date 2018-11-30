@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Location} from '@angular/common';
 import {ProjectsService} from '../../shared/api/projects.service';
 
@@ -9,11 +9,14 @@ import {ProjectsService} from '../../shared/api/projects.service';
 
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   @Input() projectForm;
   @Input() project;
 
   constructor(private location: Location, private service: ProjectsService) {
+  }
+
+  ngOnInit() {
   }
 
   cancel(): void {

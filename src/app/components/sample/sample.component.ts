@@ -13,17 +13,17 @@ import {Project} from '../../shared/model/project.model';
 
 export class SampleComponent implements OnInit {
 
-  // get project() {
-  //   return this._project;
-  // }
-  //
-  // @Input()
-  // set project(value) {
-  //   this._project = value;
-  // }
-  // private _project;
+  get project() {
+    return this._project;
+  }
 
-  @Input() project: Project;
+  @Input()
+  set project(value) {
+    this._project = value;
+  }
+  private _project;
+
+  // @Input() project: Project;
   @Input() sampleForm: FormGroup;
 
   constructor(private service: ProjectsService) {
@@ -37,9 +37,9 @@ export class SampleComponent implements OnInit {
   }
 
   public duration() {
-    if ((this.project.plannedEndDate && this.project.plannedStartDate)
-      && (this.project.plannedEndDate.getTime() - this.project.plannedStartDate.getTime()) / (24 * 60 * 60 * 1000) >= 0) {
-      return (this.project.plannedEndDate.getTime() - this.project.plannedStartDate.getTime()) / (24 * 60 * 60 * 1000);
+    if ((this._project.plannedEndDate && this._project.plannedStartDate)
+      && (this.sampleForm.controls.projectPlannedEndDate.value.getTime() - this.sampleForm.controls.projectPlannedStartDate.value.getTime()) / (24 * 60 * 60 * 1000) >= 0) {
+      return (this.sampleForm.controls.projectPlannedEndDate.value.getTime() - this.sampleForm.controls.projectPlannedStartDate.value.getTime()) / (24 * 60 * 60 * 1000);
     } else {
       return null;
     }

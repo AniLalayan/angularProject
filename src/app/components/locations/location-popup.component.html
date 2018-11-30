@@ -1,7 +1,12 @@
 <div [formGroup]="data.form">
   <span mat-dialog-title>Add Project Location</span>
 
+
+  <!--Selects-->
+
   <div mat-dialog-content>
+
+    <!--Country select-->
     <mat-form-field class="select">
       <mat-select placeholder="Country" required [(value)]="selectedCountryId" (selectionChange)="changeCountry()">
         <mat-option *ngFor="let country of countries" [value]="country.id">
@@ -9,6 +14,8 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+    <!--Distinct select-->
     <mat-form-field class="select">
       <mat-select placeholder="District" required [(value)]="selectedDistrictId">
         <mat-option *ngFor="let district of districts" [value]="district.id">
@@ -16,14 +23,17 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+    <!--Percent field-->
     <mat-form-field class="percent">
       <input matInput placeholder="%" formControlName="locationPercentFormControl">
     </mat-form-field>
   </div>
+
+  <!--Buttons-->
   <div mat-dialog-actions>
-    <button class="btn" (click)="confirm()" *ngIf="!selectedCountryId && !selectedDistrictId && !data.form.controls.locationPercentFormControl.value" disabled>Ok</button>
-    <button class="btn" (click)="confirm()" *ngIf="(selectedCountryId && selectedDistrictId) && data.form.controls.locationPercentFormControl.value" >Ok</button>
-    <!--<button class="btn" (click)="onNoClick()">Close</button>-->
+    <button class="btn" (click)="confirm()" [disabled]="!selectedCountryId || !selectedDistrictId ">Ok</button>
+    <!--<button class="btn" (click)="closeDialog()">Close</button>-->
   </div>
 </div>
 

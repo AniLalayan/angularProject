@@ -5,13 +5,9 @@
 
   <ng-container matColumnDef="id" >
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
-    <td mat-cell *matCellDef="let i">  {{getProjectTitle(i.id)}} </td>
+    <td mat-cell *matCellDef="let i" [routerLink]="[i.id]">  {{getProjectTitle(i.id)}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="editIcon" >
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let i"><img src="src/assets/edit.png" [routerLink]="[i.id]" class="edit"></td>
-  </ng-container>
 
   <ng-container matColumnDef="deleteIcon">
     <th mat-header-cell *matHeaderCellDef></th>

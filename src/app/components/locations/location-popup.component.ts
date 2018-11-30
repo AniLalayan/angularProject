@@ -2,7 +2,7 @@ import {ProjectsService} from '../../shared/api/projects.service';
 import {District} from '../../shared/model/district.model';
 import {Country} from '../../shared/model/country.model';
 import {Location} from '../../shared/model/location.model';
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 
@@ -17,6 +17,7 @@ export class LocationPopupComponent implements OnInit {
   selectedCountryId: number;
   selectedDistrictId: number;
   percent: number = null;
+
   countries: Country[] = [];
   allDistricts: District[] = [];
   districts: Array<any> = [];
@@ -29,14 +30,15 @@ export class LocationPopupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getCountries().subscribe(data => this.countries = data);
+    this.service.getCountries().subscribe(data => {
+      this.countries = data;
+    });
     this.service.getDistricts()
       .subscribe(
         data => {
           this.allDistricts = data;
           this.districts = this.allDistricts;
-        }
-      );
+        });
   }
 
   changeCountry(): void {
@@ -45,18 +47,15 @@ export class LocationPopupComponent implements OnInit {
 
   confirm(): void {
     const loc = new Location();
-    loc.percent = this.data.form.controls.locationPercentFormControl.value;
     loc.countryId = this.selectedCountryId;
     loc.districtId = this.selectedDistrictId;
+    loc.percent = this.data.form.controls.locationPercentFormControl.value;
     this.dialogRef.close(loc);
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 }
 
-// export interface LocationPopupData {
-//   countryId: number;
-//   countries: Array<Country>;
-//   dsitrictId: number;
-//   districts: Array<District>;
-//   percent: number;
-// }
 

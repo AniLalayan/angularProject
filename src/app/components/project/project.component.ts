@@ -73,8 +73,4 @@ export class ProjectComponent implements OnInit {
     this.project.plannedEndDate = this.projectForm.controls.sampleForm.controls.projectPlannedEndDate.value;
     this.service.saveProject(this.project);
   }
-
-  // saveAndClose() {
-  //   this.service.saveAndCloseProject(this.project);
-  // }
 }

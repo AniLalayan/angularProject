@@ -1,5 +1,5 @@
 <form [formGroup]="projectForm" *ngIf="isReady" (ngSubmit)="submit()">
-  <app-header [projectForm]="projectForm"></app-header>
+  <app-header [projectForm]="projectForm" [project]="project"></app-header>
   <app-sample [project]="project" [sampleForm]="projectForm.controls.sampleForm"></app-sample>
   <app-sectors [project]="project" [sectorForm]="projectForm.controls.sectorForm"></app-sectors>
   <app-locations [project]="project" [locationForm]="projectForm.controls.locationForm"></app-locations>

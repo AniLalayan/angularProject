@@ -62,3 +62,7 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
+.delete {
+  cursor: pointer;
+  margin-left: 50%;
+}
