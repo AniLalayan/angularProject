@@ -37,7 +37,7 @@ export class LocationPopupComponent implements OnInit {
       .subscribe(
         data => {
           this.allDistricts = data;
-          this.districts = this.allDistricts;
+
         });
   }
 
